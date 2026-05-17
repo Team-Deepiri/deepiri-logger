@@ -3,7 +3,10 @@ name = "deepiri_logger_rs"
 version = "0.1.0"
 edition = "2021"
 description = "Deepiri unified logger for Rust services"
-license = "MIT"
+license = "Apache-2.0"
+authors = ["Team Deepiri"]
+repository = "https://github.com/Team-Deepiri/deepiri-logger.git"
+keywords = ["logging", "structured-logging", "pii-masking", "observability", "tracing"]
 
 [dependencies]
 serde = { version = "1", features = ["derive"] }
