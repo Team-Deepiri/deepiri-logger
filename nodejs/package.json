@@ -4,15 +4,35 @@
   "description": "Deepiri unified logger for Node.js services",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "license": "Apache-2.0",
+  "author": "Team Deepiri",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Team-Deepiri/deepiri-logger.git"
+  },
+  "keywords": [
+    "logging",
+    "structured-logging",
+    "pii-masking",
+    "observability",
+    "winston"
+  ],
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc -p tsconfig.json"
+    "build": "tsc -p tsconfig.json",
+    "example": "node dist/example.js",
+    "format": "node dist/format_and_print.js"
   },
   "dependencies": {
+    "uuid": "^9.0.0",
     "winston": "^3.13.0"
   },
   "devDependencies": {
-    "typescript": "^5.9.3",
+    "@types/express": "^4.17.21",
     "@types/node": "^20.19.27",
-    "@types/express": "^4.17.21"
+    "@types/uuid": "^10.0.0",
+    "typescript": "^5.9.3"
   }
 }

@@ -2,11 +2,13 @@ from __future__ import annotations
 
 import re
 from typing import Any
+import uuid
 
-EMAIL_RE = re.compile(r"([A-Za-z0-9._%+-]+)@([A-Za-z0-9.-]+\\.[A-Za-z]{2,})")
-BEARER_RE = re.compile(r"(?i)(bearer\\s+)[A-Za-z0-9._\\-+/=]+")
+EMAIL_RE = re.compile(r"([A-Za-z0-9._%+-]+)@([A-Za-z0-9.-]+\.[A-Za-z]{2,})")
+# place hyphen at end of char class to avoid range parsing issues
+BEARER_RE = re.compile(r"(?i)(bearer\s+)[A-Za-z0-9._+/=\-]+")
 KEY_VALUE_RE = re.compile(
-    r"(?i)\\b(api[_-]?key|token|secret|password)\\b\\s*[:=]\\s*([\\\"']?)([^\\s,;\\\"']+)"
+    r"(?i)\b(api[_-]?key|token|secret|password)\b\s*[:=]\s*([\"']?)([^\s,;\"']+)"
 )
 SENSITIVE_KEYS = {
     "api_key",
@@ -60,6 +62,8 @@ def deepiri_schema_processor(logger: Any, method_name: str, event_dict: dict[str
     service_name = str(event_dict.pop("service_name", "unknown-service"))
     version = str(event_dict.pop("version", "unknown"))
     trace_id = str(event_dict.pop("trace_id", ""))
+    if not trace_id:
+        trace_id = str(uuid.uuid4())
 
     return {
         "timestamp": timestamp,
