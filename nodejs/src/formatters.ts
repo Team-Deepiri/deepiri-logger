@@ -1,5 +1,7 @@
 import winston from "winston";
 
+import { v4 as uuidv4 } from "uuid";
+
 const emailRe = /([A-Za-z0-9._%+-]+)@([A-Za-z0-9.-]+\.[A-Za-z]{2,})/g;
 const bearerRe = /(bearer\s+)[A-Za-z0-9._\-+/=]+/gi;
 const keyValueRe = /\b(api[_-]?key|token|secret|password)\b\s*[:=]\s*([\"']?)([^\s,;\"']+)/gi;
@@ -42,7 +44,7 @@ export function deepiriJsonFormat(serviceName: string, version: string): winston
   return winston.format((info) => {
     const message = scrubPii(String(info.message ?? ""));
     const level = String(info.level ?? "info").toUpperCase();
-    const traceId = String((info as any).trace_id ?? "");
+    const traceId = String((info as any).trace_id ?? "") || uuidv4();
     const context = scrubPii({ ...info });
 
     delete (context as any).level;
