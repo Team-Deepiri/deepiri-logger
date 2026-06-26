@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "deepiri-logger"
 version = "0.1.0"
 description = "Deepiri unified logger for Python services"
-readme = "../README.md"
+
 license = { text = "Apache-2.0" }
 authors = [
   { name = "Team Deepiri", email = "team@deepiri.ai" }
